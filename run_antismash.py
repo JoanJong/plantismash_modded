@@ -1311,6 +1311,8 @@ def add_translations(seq_records):
     for seq_record in seq_records:
         cdsfeatures = utils.get_cds_features(seq_record)
         for cdsfeature in cdsfeatures:
+            ### Joan - remove existing translation qualifier, to force re-translation with utils.get_aa_translation()
+            cdsfeature.qualifier['translation'] = []
             if 'translation' not in cdsfeature.qualifiers or len(cdsfeature.qualifiers['translation']) == 0:
                 if len(seq_record.seq) == 0:
                     logging.error('No amino acid sequence in input entry for CDS %r, ' \
